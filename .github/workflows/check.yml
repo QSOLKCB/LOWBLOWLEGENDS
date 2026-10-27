@@ -32,7 +32,14 @@ jobs:
 
   browser:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
+    # Keep this image version aligned with package-lock.json. Browsers and their
+    # OS libraries are baked in, avoiding slow per-run Ubuntu package downloads.
+    container:
+      image: mcr.microsoft.com/playwright:v1.51.1-noble@sha256:146d046a8d79a1b3a87596c4457b0b1c47f811bf4fc2cc1b99e873ae7f1cbbbd
+      # Match the hosted runner's workspace/home owner; Firefox rejects root
+      # running in a home directory owned by the unprivileged runner user.
+      options: --user 1001 --init --ipc=host
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,9 +50,8 @@ jobs:
           cache: npm
       - name: Install test-only dependencies
         run: npm ci --ignore-scripts
-      - name: Install pinned browser engines
-        run: npx playwright install --with-deps chromium firefox webkit
       - name: Build and test actual static application
+        timeout-minutes: 5
         run: npm run build && npm run browser
       - name: Retain browser screenshots, replay and report
         if: always()

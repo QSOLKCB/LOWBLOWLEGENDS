@@ -45,6 +45,17 @@ test('mirror symmetry across 3000 varied ticks, including stun, knockback, and m
     assert.deepEqual(b.wins,expected.wins);assert.equal(b.winner,expected.winner);
   }
 });
+test('mixed-parity collision midpoints stay integral and reflect without player bias',()=>{
+  let s=ready();s.fighters[0].x=440;s.fighters[1].x=495;
+  const n=advance(s),reflected=advance(mirror(s));
+  assert.ok(n.fighters.every(f=>Number.isInteger(f.x)));
+  assert.equal(n.fighters[1].x-n.fighters[0].x,56);
+  assert.deepEqual(reflected.fighters,mirror(n).fighters);
+  for(let i=0;i<1200;i++){
+    s=advance(s,[i%400<200?B.left:B.right,i%300<150?B.right:B.left]);
+    assert.ok(s.fighters.every(f=>Number.isInteger(f.x)&&f.x>=40&&f.x<=920));
+  }
+});
 test('high attacks block without chip, low sweeps defeat standing guard but crouch block works',()=>{
   assert.equal(perform(ready(),B.heavy,B.block,14).fighters[1].health,100);
   assert.equal(perform(ready(),B.down|B.heavy,B.block,13).fighters[1].health,89);

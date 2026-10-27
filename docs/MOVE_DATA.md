@@ -14,7 +14,7 @@ All durations are 60 Hz combat ticks, excluding hitstop. Starting a move records
 | Ledger: Terms & concussions | 32 | 1 | 28 | 224 | 0 | 48 |
 | Clinker: Mandatory tutorial | 38 | 1 | 30 | 194 | 0 | 54 |
 
-Ledger walks 6 units/tick; Clinker walks 4. Jump starts at velocity 20, gravity 1; the integer arc lands after 41 ticks. There is no air steer during an attack. Automatic facing updates only in neutral; committed attacks can be crossed over. Grounded bodies push apart, including at walls, without slot priority.
+Ledger walks 6 units/tick; Clinker walks 4. Jump starts at velocity 20, gravity 1; the integer arc lands after 41 ticks. There is no air steer during an attack. Automatic facing updates only in neutral; committed attacks can be crossed over. Grounded bodies push apart, including at walls, without slot priority. Fractional collision midpoints round toward the stage centre, retaining integer coordinates and mirror symmetry.
 
 Both psyche-outs cost 50 ego, have 180-tick cooldown, can be blocked with either guard and can be interrupted throughout startup/recovery. Ledger additionally drains 20 opponent ego on success. Both need grounded startup and only reach 115 units above the attacker, so a correctly timed jump avoids them. Their different reach/startup/stun create different commitments. They alter avatars only.
 

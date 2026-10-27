@@ -48,7 +48,7 @@ const types = { '.html':'text/html', '.css':'text/css', '.mjs':'text/javascript'
     await page.keyboard.press('Escape');await page.clock.runFor(400);assert.equal((await snap()).paused,false);check('pause freezes simulation and resumes without catch-up');
     await page.keyboard.down('w');await page.clock.runFor(200);await page.keyboard.up('w');assert.ok((await snap()).state.fighters[0].y>0);await page.clock.runFor(700);check('jump and landing from keyboard');
     await page.keyboard.down('t');await page.clock.runFor(800);await page.keyboard.up('t');
-    assert.ok((await snap()).state.fighters[1].stun>0);assert.equal((await snap()).state.fighters[0].meter,12);check('psyche-out changes state and displays original subtitle');
+    assert.ok((await snap()).state.fighters[1].stun>0);assert.equal((await snap()).state.fighters[0].meter,12);assert.match(await page.locator('#meter0').textContent(),/WAIT/);check('psyche-out changes state, displays original subtitle and shows cooldown');
     await page.screenshot({path:path.join(output,'combat.png')});
     await page.keyboard.down('a');await page.clock.runFor(650);await page.keyboard.up('a');
     // Keep the real configured clock; virtual browser time runs all animation callbacks.

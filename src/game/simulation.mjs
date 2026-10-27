@@ -40,13 +40,15 @@ function selectMove(bits, f) {
   if (bits & B.light) return f.y > 0 ? 'air' : 'light';
   return '';
 }
-// Shared positional transaction; even world steps keep separation integral.
+// Shared positional transaction. Half-unit midpoints round toward stage centre,
+// which preserves integer positions and mirror symmetry without slot priority.
 function separate(fs) {
   if (Math.abs(fs[0].y - fs[1].y) >= 90) return;
   const left = fs[0].x < fs[1].x || (fs[0].x === fs[1].x && fs[0].facing === 1) ? 0 : 1;
   const a = fs[left], b = fs[1 - left];
   if (b.x - a.x >= 56) return;
-  const middle = (a.x + b.x) / 2;
+  const midpoint = (a.x + b.x) / 2;
+  const middle = midpoint < 480 ? Math.ceil(midpoint) : Math.floor(midpoint);
   a.x = middle - 28; b.x = middle + 28;
   const shift = a.x < 40 ? 40 - a.x : b.x > 920 ? 920 - b.x : 0;
   a.x += shift; b.x += shift;

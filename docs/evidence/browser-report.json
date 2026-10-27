@@ -1,13 +1,13 @@
 {
-  "testedAt": "2026-10-27T03:05:20.084Z",
-  "url": "http://127.0.0.1:38921/LOWBLOWLEGENDS/",
+  "testedAt": "2026-10-27T03:14:42.432Z",
+  "url": "http://127.0.0.1:41393/LOWBLOWLEGENDS/",
   "checks": [
     "character selection renders; reduced-motion and default flash/shake settings",
     "both players move through real keyboard events",
     "keyboard light attack produces damage",
     "pause freezes simulation and resumes without catch-up",
     "jump and landing from keyboard",
-    "psyche-out changes state and displays original subtitle",
+    "psyche-out changes state, displays original subtitle and shows cooldown",
     "first timeout awards round by health",
     "full two-round match, victory UI and finisher dialogue",
     "real match replay verifies in browser and exports",
@@ -42,8 +42,8 @@
   "performance": {
     "samples": 600,
     "medianMs": 0.09999999403953552,
-    "p95Ms": 0.20000000298023224,
-    "maxMs": 5.200000002980232,
+    "p95Ms": 0.29999999701976776,
+    "maxMs": 22.5,
     "note": "Headless Chromium CPU step + Canvas command submission; not physical display FPS."
   }
 }

@@ -92,7 +92,7 @@ function display() {
   state.fighters.forEach((f,i)=>{
     $('name'+i).textContent=FIGHTERS[f.character].name+((mode==='cpu'&&i===1)?' / CPU':'');
     $('health'+i).value=f.health;$('hp'+i).textContent=f.health+' HP';$('wins'+i).textContent=state.wins[i]+' WINS';
-    $('meter'+i).textContent=`EGO ${f.meter} / 100${f.meter>=50?' • PSYCHE READY':''}`;
+    $('meter'+i).textContent=`EGO ${f.meter} / 100${f.psycheCooldown>0?' • WAIT '+Math.ceil(f.psycheCooldown/60)+'s':f.meter>=50?' • PSYCHE READY':''}`;
   });
   $('timer').textContent=Math.ceil(state.timer/60).toString().padStart(2,'0');$('round').textContent='ROUND '+state.round;
   const result=state.phase==='matchOver', round=state.phase==='roundOver';

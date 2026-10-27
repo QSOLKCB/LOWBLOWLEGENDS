@@ -1,8 +1,9 @@
 {
-  "testedAt": "2026-10-27T03:14:42.432Z",
-  "url": "http://127.0.0.1:41393/LOWBLOWLEGENDS/",
+  "testedAt": "2026-10-27T03:17:53.120Z",
+  "url": "http://127.0.0.1:38101/LOWBLOWLEGENDS/",
   "checks": [
     "character selection renders; reduced-motion and default flash/shake settings",
+    "repeated mapped arrow keydown suppresses page scrolling",
     "both players move through real keyboard events",
     "keyboard light attack produces damage",
     "pause freezes simulation and resumes without catch-up",
@@ -13,6 +14,7 @@
     "real match replay verifies in browser and exports",
     "restart resets wins, health, inputs and round",
     "focus loss clears held keys; Tab exits game controls",
+    "start, resume and rematch cancel pending remaps without swallowing gameplay",
     "control remapping applies to actual combat",
     "browser replays frozen Node fixture to identical digest",
     "offline reload, saved bindings and playable startup",
@@ -32,7 +34,7 @@
     }
   ],
   "failures": [
-    "browserType.launch: \n╔══════════════════════════════════════════════════════╗\n║ Host system is missing dependencies to run browsers. ║\n║ Missing libraries:                                   ║\n║     libgstreamer-1.0.so.0                            ║\n║     libgtk-4.so.1                                    ║\n║     libgraphene-1.0.so.0                             ║\n║     libwoff2dec.so.1.0.2                             ║\n║     libevent-2.1.so.7                                ║\n║     libgstallocators-1.0.so.0                        ║\n║     libgstapp-1.0.so.0                               ║\n║     libgstbase-1.0.so.0                              ║\n║     libgstpbutils-1.0.so.0                           ║\n║     libgstaudio-1.0.so.0                             ║\n║     libgstgl-1.0.so.0                                ║\n║     libgsttag-1.0.so.0                               ║\n║     libgstvideo-1.0.so.0                             ║\n║     libgstcodecparsers-1.0.so.0                      ║\n║     libgstfft-1.0.so.0                               ║\n║     libavif.so.16                                    ║\n║     libharfbuzz-icu.so.0                             ║\n║     libsecret-1.so.0                                 ║\n║     libhyphen.so.0                                   ║\n║     libwayland-server.so.0                           ║\n║     libmanette-0.2.so.0                              ║\n║     libGLESv2.so.2                                   ║\n╚══════════════════════════════════════════════════════╝\n    at /workspace/scratch/aa9694040d39/LOWBLOWLEGENDS/tools/browser-check.cjs:101:28"
+    "browserType.launch: \n╔══════════════════════════════════════════════════════╗\n║ Host system is missing dependencies to run browsers. ║\n║ Missing libraries:                                   ║\n║     libgstreamer-1.0.so.0                            ║\n║     libgtk-4.so.1                                    ║\n║     libgraphene-1.0.so.0                             ║\n║     libwoff2dec.so.1.0.2                             ║\n║     libevent-2.1.so.7                                ║\n║     libgstallocators-1.0.so.0                        ║\n║     libgstapp-1.0.so.0                               ║\n║     libgstbase-1.0.so.0                              ║\n║     libgstpbutils-1.0.so.0                           ║\n║     libgstaudio-1.0.so.0                             ║\n║     libgstgl-1.0.so.0                                ║\n║     libgsttag-1.0.so.0                               ║\n║     libgstvideo-1.0.so.0                             ║\n║     libgstcodecparsers-1.0.so.0                      ║\n║     libgstfft-1.0.so.0                               ║\n║     libavif.so.16                                    ║\n║     libharfbuzz-icu.so.0                             ║\n║     libsecret-1.so.0                                 ║\n║     libhyphen.so.0                                   ║\n║     libwayland-server.so.0                           ║\n║     libmanette-0.2.so.0                              ║\n║     libGLESv2.so.2                                   ║\n╚══════════════════════════════════════════════════════╝\n    at /workspace/scratch/aa9694040d39/LOWBLOWLEGENDS/tools/browser-check.cjs:115:28"
   ],
   "replay": {
     "ticks": 1488,
@@ -42,8 +44,8 @@
   "performance": {
     "samples": 600,
     "medianMs": 0.09999999403953552,
-    "p95Ms": 0.29999999701976776,
-    "maxMs": 22.5,
+    "p95Ms": 0.20000000298023224,
+    "maxMs": 3.6000000089406967,
     "note": "Headless Chromium CPU step + Canvas command submission; not physical display FPS."
   }
 }

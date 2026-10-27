@@ -44,12 +44,17 @@ function updateTips() {
   [0,1].forEach(i=>{$('tip'+i).textContent=`P${i+1} · ${['light','heavy','block','special','psyche','throw'].map(a=>`${label(keys[i][ACTIONS.indexOf(a)])} ${a}`).join(' / ')}`;});
 }
 function clearInput() {input.clear();}
+function cancelBinding() {
+  if(binding){binding=null;$('binding-status').textContent='Remap cancelled.';}
+}
 function setPaused(value) {
   if(!state||state.phase==='matchOver') return;
+  if(!value)cancelBinding();
   paused=value;clearInput();clock.reset(performance.now());
   $('pause').textContent=paused?'Resume (Esc)':'Pause (Esc)';display();
 }
 function begin() {
+  cancelBinding();
   config={characters:[$('p1').value,$('p2').value],seconds:Number($('seconds').value),seed:1};
   mode=$('mode').value;state=initialState(config);frames=[];paused=false;lastPhase='';subtitleUntil=0;
   clearInput();clock.reset(performance.now());$('selection').hidden=true;$('arena').hidden=false;$('help').open=false;
@@ -57,7 +62,7 @@ function begin() {
   $('subtitle').textContent='The complaints department is now accepting punches.';
   updateTips();display();canvas.focus();
 }
-function leave() {state=null;paused=false;clearInput();$('arena').hidden=true;$('selection').hidden=false;$('p1').focus();}
+function leave() {cancelBinding();state=null;paused=false;clearInput();$('arena').hidden=true;$('selection').hidden=false;$('p1').focus();}
 $('setup').onsubmit=e=>{e.preventDefault();begin();};
 $('pause').onclick=()=>{setPaused(!paused);if(!paused)canvas.focus();};
 $('resume').onclick=()=>{setPaused(false);canvas.focus();};
@@ -80,8 +85,8 @@ window.addEventListener('keydown',e=>{
   if(!state) return;
   if(e.code==='Escape'&&!e.repeat){e.preventDefault();setPaused(!paused);if(!paused)canvas.focus();return;}
   if(e.code==='Tab'){setPaused(true);return;}
-  if(paused||document.activeElement!==canvas||e.repeat||e.altKey||e.metaKey) return;
-  keys.forEach((row,p)=>{const k=row.indexOf(e.code);if(k>=0){e.preventDefault();input.push(performance.now(),p,B[ACTIONS[k]],true);}});
+  if(paused||document.activeElement!==canvas||e.altKey||e.metaKey) return;
+  keys.forEach((row,p)=>{const k=row.indexOf(e.code);if(k>=0){e.preventDefault();if(!e.repeat)input.push(performance.now(),p,B[ACTIONS[k]],true);}});
 });
 window.addEventListener('keyup',e=>{
   if(!state||paused)return;

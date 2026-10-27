@@ -37,7 +37,9 @@ jobs:
     # OS libraries are baked in, avoiding slow per-run Ubuntu package downloads.
     container:
       image: mcr.microsoft.com/playwright:v1.51.1-noble@sha256:146d046a8d79a1b3a87596c4457b0b1c47f811bf4fc2cc1b99e873ae7f1cbbbd
-      options: --init --ipc=host
+      # Match the hosted runner's workspace/home owner; Firefox rejects root
+      # running in a home directory owned by the unprivileged runner user.
+      options: --user 1001 --init --ipc=host
     steps:
       - uses: actions/checkout@v4
         with:

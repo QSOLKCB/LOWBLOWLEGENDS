@@ -6,6 +6,9 @@ and registry manifest digest; its version must match the Playwright dependency
 in `package.json` and `package-lock.json`. `npm ci --ignore-scripts` still installs
 the locked test package. The browsers and system libraries come from the image,
 so CI does not run `playwright install --with-deps` on each invocation.
+The container runs as UID 1001, matching the hosted runner's workspace/home
+ownership. Running as root with GitHub's user-owned home prevents Firefox from
+starting; no home-variable override or browser-test exemption is used.
 
 The container is test infrastructure only. It adds no production assets,
 packages, network requests or runtime bytes. It exercises the local staged site,

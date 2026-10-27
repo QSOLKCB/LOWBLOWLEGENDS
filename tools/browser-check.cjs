@@ -35,7 +35,10 @@ const types = { '.html':'text/html', '.css':'text/css', '.mjs':'text/javascript'
     await page.screenshot({path:path.join(output,'selection.png'),fullPage:true});
     assert.equal(await page.locator('#motion').isChecked(),false);assert.equal(await page.locator('#shake').isChecked(),false);assert.equal(await page.locator('#flashes').isChecked(),false);
     check('character selection renders; reduced-motion and default flash/shake settings');
-    await page.clock.install();
+    // install() alone still advances with wall time between driver commands.
+    // Freeze before gameplay so runner latency cannot consume attack frames.
+    await page.clock.install({time:new Date('2026-01-01T00:00:00Z')});
+    await page.clock.pauseAt(new Date('2026-01-01T00:01:00Z'));
     await page.selectOption('#mode','local');await page.selectOption('#seconds','15');
     await page.getByRole('button',{name:'Remap player 1 light: F',exact:true}).click();
     for(const code of ['ControlLeft','ControlRight']) {
@@ -46,6 +49,10 @@ const types = { '.html':'text/html', '.css':'text/css', '.mjs':'text/javascript'
     await page.locator('#setup button').click();await page.clock.runFor(1600);
     const snap=()=>page.evaluate(()=>window.lblSnapshot);
     assert.equal((await snap()).state.phase,'fight');
+    const frozenFrames=(await snap()).frames;
+    await new Promise(resolve=>setTimeout(resolve,100));
+    assert.equal((await snap()).frames,frozenFrames);
+    check('driver wall time does not advance the explicit test clock');
     await page.evaluate(()=>{window.repeatedKeys=[];window.addEventListener('keydown',e=>{if(e.repeat)window.repeatedKeys.push({code:e.code,prevented:e.defaultPrevented});});});
     const scrollBefore=await page.evaluate(()=>scrollY);
     await page.keyboard.down('ArrowDown');await page.keyboard.down('ArrowDown');await page.clock.runFor(150);await page.keyboard.up('ArrowDown');

@@ -10,6 +10,12 @@ The container runs as UID 1001, matching the hosted runner's workspace/home
 ownership. Running as root with GitHub's user-owned home prevents Firefox from
 starting; no home-variable override or browser-test exemption is used.
 
+The Chromium keyboard harness freezes Playwright's clock before starting a
+match, then advances simulation only through `clock.runFor`. Installing the
+clock alone leaves it advancing between driver commands, so a slow runner can
+consume a short attack before its state assertion. A wall-time delay now checks
+that the test clock stays frozen; all existing combat assertions are retained.
+
 The container is test infrastructure only. It adds no production assets,
 packages, network requests or runtime bytes. It exercises the local staged site,
 not arbitrary external websites. See the upstream [Docker guidance](https://playwright.dev/docs/docker)

@@ -1,6 +1,6 @@
 // Cache only this repository's known static runtime; never unrelated origin data.
 const PREFIX = 'lbl-arcade-' + self.registration.scope + '-';
-const CACHE = PREFIX + '3';
+const CACHE = PREFIX + '4';
 const FILES = ['./','./index.html','./style.css','./src/game/app.mjs','./src/game/content.mjs',
   './src/game/simulation.mjs','./src/game/render.mjs','./src/game/timing.mjs','./src/game/cpu.mjs'];
 const URLS = FILES.map(path=>new URL(path,self.registration.scope).href);

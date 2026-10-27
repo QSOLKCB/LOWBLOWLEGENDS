@@ -8,7 +8,7 @@ const text = (id,value) => { if($(id).textContent!==value) $(id).textContent=val
 const canvas=$('stage'), ctx=canvas.getContext('2d'), clock=new FixedClock(), input=new InputQueue();
 const defaults=[['KeyA','KeyD','KeyW','KeyS','KeyF','KeyG','KeyH','KeyR','KeyT','KeyY'],
   ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','KeyJ','KeyK','KeyL','KeyU','KeyI','KeyO']];
-const allowed = code => /^(Key[A-Z]|Digit[0-9]|Arrow(Left|Right|Up|Down)|Space|Shift(Left|Right)|Control(Left|Right)|Numpad[0-9])$/.test(code);
+const allowed = code => /^(Key[A-Z]|Digit[0-9]|Arrow(Left|Right|Up|Down)|Space|Shift(Left|Right)|Numpad[0-9])$/.test(code);
 const label = code => code.replace('Key','').replace('Digit','').replace('Arrow','').replace('Numpad','Num ');
 const loadKeys = () => {
   try {
@@ -77,7 +77,7 @@ window.addEventListener('keydown',e=>{
   if(e.altKey||e.metaKey||(e.ctrlKey&&!e.code.startsWith('Control'))) return;
   if(binding) {
     e.preventDefault();if(e.code==='Escape'){binding=null;$('binding-status').textContent='Remap cancelled.';return;}
-    if(!allowed(e.code)){$('binding-status').textContent='Use a letter, number, arrow, Space, Shift or Control. Browser navigation keys are reserved.';return;}
+    if(!allowed(e.code)){$('binding-status').textContent='Use a letter, number, arrow, Space or Shift. Browser navigation keys are reserved.';return;}
     const {player,index}=binding;
     if(keys.some((row,p)=>row.some((key,k)=>key===e.code&&(p!==player||k!==index)))){$('binding-status').textContent='That key is already assigned. Choose another.';return;}
     keys[player][index]=e.code;binding=null;saveKeys();bindings();$('binding-status').textContent='Binding saved.';return;

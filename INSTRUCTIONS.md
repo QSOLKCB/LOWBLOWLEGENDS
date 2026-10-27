@@ -13,7 +13,7 @@ Choose both fighters (mirror matches are allowed), select **CPU sparring partner
 | Throw | Y | O |
 | Pause / resume | Escape | Escape |
 
-Tap attacks; holding them never auto-repeats. Movement and guard use held keys. Every gameplay binding is remappable in the field manual. Duplicate assignments are rejected. Escape cancels a remap; starting, resuming or rematching also cancels unfinished remaps; Tab and browser shortcuts retain normal navigation. Key bindings alone are saved locally. Keyboard ghosting varies by hardware; change conflicting bindings if simultaneous controls fail.
+Tap attacks; holding them never auto-repeats. Movement and guard use held keys. Every gameplay binding is remappable in the field manual. Duplicate assignments are rejected. Control, Alt and Meta remain reserved for browser/OS shortcuts and cannot be bound; Shift is supported. Invalid saved mappings fall back to defaults. Escape cancels a remap; starting, resuming or rematching also cancels unfinished remaps; Tab and browser shortcuts retain normal navigation. Key bindings alone are saved locally. Keyboard ghosting varies by hardware; change conflicting bindings if simultaneous controls fail.
 
 - **Light → heavy:** land a light, then tap heavy during the confirmation window. It cancels light recovery into a true two-hit combo.
 - **Down + heavy:** low sweep defeats standing guard. Hold down + block to defend it.

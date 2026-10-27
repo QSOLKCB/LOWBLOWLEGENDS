@@ -38,6 +38,11 @@ const types = { '.html':'text/html', '.css':'text/css', '.mjs':'text/javascript'
     await page.clock.install();
     await page.selectOption('#mode','local');await page.selectOption('#seconds','15');
     await page.getByRole('button',{name:'Remap player 1 light: F',exact:true}).click();
+    for(const code of ['ControlLeft','ControlRight']) {
+      await page.keyboard.press(code);assert.match(await page.locator('#binding-status').textContent(),/Browser navigation keys are reserved/);
+      assert.equal(await page.getByRole('button',{name:'Remap player 1 light: F',exact:true}).count(),1);
+    }
+    check('ControlLeft and ControlRight cannot become gameplay bindings');
     await page.locator('#setup button').click();await page.clock.runFor(1600);
     const snap=()=>page.evaluate(()=>window.lblSnapshot);
     assert.equal((await snap()).state.phase,'fight');
@@ -81,6 +86,15 @@ const types = { '.html':'text/html', '.css':'text/css', '.mjs':'text/javascript'
     const freshX=(await snap()).state.fighters[0].x;await page.keyboard.down('d');await page.clock.runFor(50);await page.keyboard.up('d');assert.ok((await snap()).state.fighters[0].x>freshX);
     check('start, resume and rematch cancel pending remaps without swallowing gameplay');
     await page.keyboard.press('Escape');await page.locator('#help summary').click();
+    await page.getByRole('button',{name:'Remap player 1 block: H',exact:true}).click();await page.keyboard.press('ShiftLeft');await page.locator('#resume').click();
+    const enemyX=(await snap()).state.fighters[1].x;
+    await page.keyboard.down('ShiftLeft');await page.keyboard.down('s');await page.keyboard.down('ArrowLeft');await page.clock.runFor(50);
+    await page.keyboard.down('j');await page.clock.runFor(50);
+    const modifierState=(await snap()).state;assert.equal(modifierState.fighters[0].blocking,true);assert.equal(modifierState.fighters[0].duck,true);
+    assert.ok(modifierState.fighters[1].x<enemyX);assert.equal(modifierState.fighters[1].move,'light');
+    for(const key of ['j','ArrowLeft','s','ShiftLeft'])await page.keyboard.up(key);await page.clock.runFor(500);
+    check('allowed Shift binding supports low guard and simultaneous opponent movement/attack');
+    await page.keyboard.press('Escape');
     await page.getByRole('button',{name:'Remap player 1 light: F',exact:true}).click();await page.keyboard.press('z');
     await page.locator('#resume').click();await page.clock.runFor(50);
     await page.keyboard.down('d');await page.clock.runFor(1050);await page.keyboard.up('d');await page.clock.runFor(50);
@@ -110,6 +124,13 @@ const types = { '.html':'text/html', '.css':'text/css', '.mjs':'text/javascript'
       for(let i=0;i<600;i++){const t=performance.now();s=sim.advance(s,fixture.frames[i]);renderer.render(ctx,s,{motion:true,flashes:false,shake:false,boxes:false});values.push(performance.now()-t);}
       values.sort((a,b)=>a-b);return {samples:600,medianMs:values[300],p95Ms:values[570],maxMs:values[599],note:'Headless Chromium CPU step + Canvas command submission; not physical display FPS.'};
     },fixture);
+    const legacyContext=await browser.newContext();const legacy=await legacyContext.newPage();
+    await legacy.addInitScript(()=>localStorage.setItem('lbl-keys-v1',JSON.stringify([
+      ['KeyA','KeyD','KeyW','KeyS','KeyF','KeyG','ControlLeft','KeyR','KeyT','KeyY'],
+      ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','KeyJ','KeyK','KeyL','KeyU','KeyI','KeyO']
+    ])));
+    await legacy.goto(url);assert.equal(await legacy.getByRole('button',{name:'Remap player 1 block: H',exact:true}).count(),1);
+    check('legacy saved Control bindings are rejected on load');
     await browser.close();browser=null;
     for(const [name,engine] of [['firefox',firefox],['webkit',webkit]]){
       browser=await engine.launch({headless:true,timeout:15000,env:{...process.env,MOZ_DISABLE_CONTENT_SANDBOX:'1'}});const page=await browser.newPage();page.setDefaultTimeout(10000);page.on('pageerror',e=>console.error(name,e.message));await page.goto(url);console.log(name,'loaded');

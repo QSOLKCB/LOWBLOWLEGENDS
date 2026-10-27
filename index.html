@@ -1,75 +1,51 @@
 <!doctype html>
-<html lang="en-AU">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
-  <meta name="description" content="LOW BLOW LEGENDS — an original, satirical 2D arcade fighter in pre-production. Good combat. Terrible sportsmanship.">
-  <title>LOW BLOW LEGENDS — Tournament of Questionable Judgement</title>
-  <link rel="stylesheet" href="./style.css">
-  <script src="./src/teaser.js" defer></script>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LOW BLOW LEGENDS: original arcade combat, questionable professional conduct.">
+  <meta name="theme-color" content="#11171b">
+  <title>LOW BLOW LEGENDS — The Arbitration Pit</title>
+  <link rel="icon" href="data:,"><link rel="stylesheet" href="./style.css">
+  <script type="module" src="./src/game/app.mjs"></script>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-  <div class="site">
-    <header class="topbar">
-      <a class="brand" href="./" aria-label="LOW BLOW LEGENDS home">LBL<span class="spark">*</span></a>
-      <div class="topmeta"><span class="status-dot" aria-hidden="true"></span> PRE-PRODUCTION / VISION BASELINE</div>
-      <a class="source" href="https://github.com/QSOLKCB/LOWBLOWLEGENDS" rel="noopener noreferrer">VIEW SOURCE <span aria-hidden="true">↗</span></a>
-    </header>
-    <main id="main">
-      <section class="hero" aria-labelledby="title">
-        <div class="eyebrow">QSOL-IMC // PRESENTS // A SERIOUSLY UNSERIOUS FIGHTER</div>
-        <h1 id="title"><span>LOW BLOW</span><strong>LEGENDS<span class="bang">!</span></strong></h1>
-        <p class="strap">GOOD COMBAT. <em>TERRIBLE SPORTSMANSHIP.</em></p>
-        <p class="intro">The fighters are fictional. The egos are enormous. The finishing moves are an absolute administrative nightmare.</p>
-        <div class="hero-footer">
-          <span class="pill">2D ARCADE FIGHTER — IN DESIGN</span>
-          <span class="minor">NO FIGHTABLE BUILD YET · NO DLC REQUIRED TO READ THIS PAGE</span>
-        </div>
-      </section>
-      <section class="battleground" aria-label="Tournament concept">
-        <div class="ring-header"><span>EXHIBITION 000 — THE CONCEPT</span><span class="ring-number">00 : 00</span><span>NO ACTUAL COMBAT SIMULATED</span></div>
-        <div class="versus">
-          <article class="contender left">
-            <div class="fighter-no" aria-hidden="true">01</div>
-            <div class="card-detail">THE MOTIVATIONAL MENACE</div>
-            <h2>SIR<br>FLEXINGTON</h2>
-            <p>Can bench-press 140 kilograms and still cannot read the room.</p>
-          </article>
-          <div class="vs" aria-hidden="true">VS</div>
-          <article class="contender right">
-            <div class="fighter-no" aria-hidden="true">02</div>
-            <div class="card-detail">THE CORPORATE DISASTER</div>
-            <h2>THE<br>EXECUTIVE</h2>
-            <p>Outsources punches. Charges his opponent for receiving them.</p>
-          </article>
-        </div>
-        <div class="arena-caption">CONCEPT CARDS ONLY — ORIGINAL CHARACTER DESIGNS PENDING</div>
-      </section>
-      <section class="psyche-panel" aria-labelledby="psyche-heading">
-        <div class="panel-header"><span class="small-tag">SPECIAL MECHANIC</span><span class="mini-rule"></span><span>PSYCHE-OUT PREVIEW</span></div>
-        <h2 id="psyche-heading">WEAPONISED <em>NONSENSE.</em></h2>
-        <p>Instead of bloody finishers, our contenders have emotionally inconvenient opinions. This button previews <strong>dialogue only</strong> — in-game combat and stun effects come later.</p>
-        <div class="quote-box" aria-live="polite" aria-atomic="true">
-          <div class="quote-label" id="quote-speaker">SIR FLEXINGTON</div>
-          <blockquote id="quote-line">Your problem is not your technique. It is your mindset. And possibly your trousers.</blockquote>
-        </div>
-        <button type="button" id="next-psyche-out">NEXT PSYCHE-OUT <span aria-hidden="true">↻</span></button>
-      </section>
-      <section class="rules" aria-label="Project rules">
-        <h2>THE RULES OF ENGAGEMENT</h2>
-        <div class="rule-grid">
-          <div><b>01 / COMBAT FIRST</b><p>Proper spacing, blocking, timing and counterplay. Then the ridiculousness.</p></div>
-          <div><b>02 / ORIGINAL BY DESIGN</b><p>Genre satire, not stolen sprites or a celebrity with their moustache reversed.</p></div>
-          <div><b>03 / DETERMINISTIC HEART</b><p>60-tick simulation contract, replay checks and fair simultaneous exchanges.</p></div>
-          <div><b>04 / NO BLOAT</b><p>Browser-native, privacy-respecting, and allergic to seventeen toolchains.</p></div>
-        </div>
-        <p class="rules-link">Project contract: <a href="https://github.com/QSOLKCB/LOWBLOWLEGENDS/blob/main/docs/INVARIANTS.md">core invariants ↗</a></p>
-      </section>
-    </main>
-    <footer><span>© QSOL-IMC · ORIGINAL SATIRE · APACHE-2.0 CODE</span><span>THIS GAME DOES NOT EXIST YET. ITS ATTITUDE DOES.</span></footer>
-  </div>
+<a class="skip" href="#controls">Skip to controls</a>
+<header><a class="wordmark" href="./"><span>LOW BLOW</span> LEGENDS<i>QSOL–IMC / ARCADE DIVISION</i></a><div class="edition">VOL. 01 <span>THE ARBITRATION PIT</span></div></header>
+<main>
+  <section id="selection" aria-labelledby="select-title">
+    <div class="intro"><p class="eyebrow">TWO FIGHTERS. ZERO PROFESSIONAL STANDARDS.</p><h1 id="select-title">Settle it<br><em>outside HR.</em></h1><p>A proper fight. An improper amount of paperwork.<br>Pick your dispute. Bring your own dignity.</p></div>
+    <div class="roster">
+      <article class="fighter-card"><canvas id="portrait-ledger" width="260" height="220" aria-label="Ledger: angular inspection automaton with a perforated paper head" role="img"></canvas><span class="serial">01 / SPACING</span><h2>LEDGER</h2><p>Warranty enforcement</p><p class="bio">Voids guarantees. Extends punches.<br>Every bruise comes with a receipt.</p></article>
+      <article class="fighter-card clinker"><canvas id="portrait-clinker" width="260" height="220" aria-label="Clinker: broad ceramic boiler creature with a chimney and pressure gauge" role="img"></canvas><span class="serial">02 / ANTI-AIR</span><h2>CLINKER</h2><p>Unlicensed pressure vessel</p><p class="bio">Short fuse. Long grievance.<br>Has never passed an inspection.</p></article>
+    </div>
+    <form id="setup">
+      <label>Player 1<select id="p1"><option value="ledger">Ledger</option><option value="clinker">Clinker</option></select></label>
+      <label>Player 2<select id="p2"><option value="clinker">Clinker</option><option value="ledger">Ledger</option></select></label>
+      <label>Opponent<select id="mode"><option value="cpu">CPU sparring partner</option><option value="local">Local player 2</option></select></label>
+      <label>Round clock<select id="seconds"><option value="60">60 seconds</option><option value="30">30 seconds</option><option value="15">15 seconds</option></select></label>
+      <button class="primary" type="submit">ENTER THE PIT <span>↗</span></button>
+    </form>
+    <p class="small">First to two round wins · Five-round limit · Keyboard required · Original playable vertical slice</p>
+  </section>
+  <section id="arena" hidden aria-label="Match">
+    <div class="match-tools"><span>THE ARBITRATION PIT <small>/ LOCAL COMBAT</small></span><button id="pause" type="button">Pause (Esc)</button><button id="leave" type="button">Fighter select</button></div>
+    <div class="hud"><div><div class="name"><strong id="name0">LEDGER</strong><span id="wins0">0 WINS</span></div><meter id="health0" min="0" max="100" value="100" aria-label="Player 1 health"></meter><div class="resources"><span id="hp0">100 HP</span><span id="meter0">EGO 50 / 100</span></div></div><div class="clock"><b id="timer">60</b><span id="round">ROUND 1</span></div><div><div class="name"><strong id="name1">CLINKER</strong><span id="wins1">0 WINS</span></div><meter id="health1" min="0" max="100" value="100" aria-label="Player 2 health"></meter><div class="resources"><span id="hp1">100 HP</span><span id="meter1">EGO 50 / 100</span></div></div></div>
+    <div class="stage-wrap"><canvas id="stage" width="960" height="500" tabindex="0" role="img" aria-label="Fighting arena. Keyboard controls below. Escape pauses; Tab leaves the game."></canvas>
+      <div id="overlay" hidden><p class="eyebrow" id="overlay-label">TIME OUT</p><h2 id="result" aria-live="polite" aria-atomic="true">Paused</h2><p id="result-detail"></p><div><button class="primary" id="resume">Resume</button><button id="rematch">Rematch</button><button id="back">Fighter select</button></div></div>
+    </div>
+    <div id="subtitle" class="subtitle" aria-live="polite">The complaints department is now accepting punches.</div>
+    <div class="fight-tips"><span id="tip0"></span><span id="tip1"></span></div>
+    <div class="replay-tools"><button id="replay">Verify &amp; save replay</button><label class="file-label">Check saved replay<input id="replay-file" type="file" accept=".json,application/json"></label><output id="replay-status" aria-live="polite"></output></div>
+  </section>
+  <details id="help" open><summary>FIELD MANUAL <span>Controls / moves / comfort</span></summary>
+    <div class="manual">
+      <section id="controls"><h2>Your keyboard. Your problem.</h2><p>Click any binding, then press a key to remap it. Changes are saved only on this device. Esc and Tab stay available.</p><div id="bindings"></div><button id="reset-keys">Reset keys</button><p id="binding-status" role="status"></p></section>
+      <section><h2>Read the room. Then hit it.</h2><ul><li><b>Light → heavy:</b> confirm a light hit, then tap heavy for a two-hit combo.</li><li><b>Down + heavy:</b> sweep beneath standing guard. Down + block guards low.</li><li><b>Throw:</b> beats close guarding. Jump or back away to escape.</li><li><b>Special:</b> Ledger has reach; Clinker punishes jumping opponents.</li><li><b>Psyche-out:</b> costs 50 ego. A long, interruptible taunt stuns in range. Block, jump clear or hit the windup. Ledger also drains 20 ego.</li><li><b>No chip damage.</b> A held attack never repeats. Tap again. Pausing clears held keys.</li></ul><p>Sharing a keyboard can cause hardware ghosting. Remap conflicting keys. CPU is a simple sparring partner.</p></section>
+      <section><h2>Comfort &amp; clarity</h2><label class="check"><input id="subtitles" type="checkbox" checked> Fourth-wall subtitles</label><label class="check"><input id="motion" type="checkbox"> Idle animation</label><label class="check"><input id="flashes" type="checkbox"> Small impact markers</label><label class="check"><input id="shake" type="checkbox"> Gentle camera shake</label><label class="check"><input id="boxes" type="checkbox"> Show collision boxes</label><p>Flash and shake default off. No audio, voices, tracking, accounts or remote assets. Browser zoom scales HUD and controls.</p><p id="offline-status" role="status">Preparing offline play…</p></section>
+    </div>
+  </details>
+  <noscript>This game needs JavaScript enabled. It runs entirely on your device.</noscript>
+</main>
+<footer><span>LOW BLOW LEGENDS / PLAYABLE SLICE</span><span>FICTIONAL EGOS. REAL RECOVERY FRAMES.</span><a href="https://github.com/QSOLKCB/LOWBLOWLEGENDS">Source &amp; rights ↗</a></footer>
 </body>
 </html>
-

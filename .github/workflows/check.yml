@@ -1,4 +1,4 @@
-name: Foundation checks
+name: Arcade checks
 
 on:
   pull_request:
@@ -11,27 +11,53 @@ permissions:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify docs, deterministic combat reference and static bundle
+      - name: Verify invariants, reference and playable combat, replay and static bundle
         run: npm run verify
       - name: Verify staged bundle has no runtime packages
         run: |
           test -f _site/index.html
-          test -f _site/src/teaser.js
+          test -f _site/src/game/app.mjs
           test -f _site/style.css
           test ! -e _site/node_modules
 
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install test-only dependencies
+        run: npm ci --ignore-scripts
+      - name: Install pinned browser engines
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Build and test actual static application
+        run: npm run build && npm run browser
+      - name: Retain browser screenshots, replay and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lbl-browser-evidence-${{ github.event.pull_request.head.sha || github.sha }}
+          path: test-results/
+
   pages:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: verify
-    runs-on: ubuntu-latest
+    needs: [verify, browser]
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       pages: write
@@ -42,6 +68,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Node.js
         uses: actions/setup-node@v4
         with:

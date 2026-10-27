@@ -1,54 +1,45 @@
 # LOW BLOW LEGENDS
 
-**A 2D arcade fighter with legitimate combat mechanics and profoundly illegitimate finishing moves.**
+**Proper arcade combat. Catastrophically unprofessional conduct.**
 
-[![Foundation checks](https://github.com/QSOLKCB/LOWBLOWLEGENDS/actions/workflows/check.yml/badge.svg)](https://github.com/QSOLKCB/LOWBLOWLEGENDS/actions/workflows/check.yml) · [Project site](https://qsolkcb.github.io/LOWBLOWLEGENDS/) · [Apache-2.0](LICENSE)
+[![Arcade checks](https://github.com/QSOLKCB/LOWBLOWLEGENDS/actions/workflows/check.yml/badge.svg)](https://github.com/QSOLKCB/LOWBLOWLEGENDS/actions/workflows/check.yml) · [Project site](https://qsolkcb.github.io/LOWBLOWLEGENDS/) · [Apache-2.0](LICENSE)
 
-> **Status: pre-production / design baseline.** This repository contains a project-site teaser, an independently testable deterministic reference combat kernel, and binding engineering/creative invariants. It is **not yet a playable fighting game**. No released version or verified Pages deployment is claimed.
+**Playable vertical slice, awaiting maintainer integration — not a tagged release.** This branch replaces the teaser with an actual 1v1 fighting game. The public Pages URL may still serve the foundation until this PR is reviewed, merged and its deployment verified.
 
-**Premise:** A tournament of totally original egomaniacs, corporate nightmares, pseudo-intellectuals and other gloriously daft fictional fighters. The combat is serious; the finishing moves have better things to do. A fighter can break the fourth wall, taunt their opponent or decline the mandatory 37-button finisher and take the direct route.
+Pick **Ledger**, an angular warranty-enforcement automaton, or **Clinker**, an unlicensed ceramic pressure vessel. Settle your dispute in the **Arbitration Pit** with local two-player controls or a simple CPU sparring partner.
 
-## Project laws
+- Walk, duck, jump, block, light/heavy attacks, sweeps, throws, specials and a light-to-heavy combo.
+- Meter-costed, interruptible psyche-outs with original fourth-wall subtitles.
+- First to two wins, KO/timeout/draw, bounded rounds, result screen, pause and rematch.
+- Remappable keyboard controls, reduced motion, optional hitbox display, flash/shake off by default.
+- Deterministic 60 Hz simulation, replay export/verification and offline reload after the first successful cache.
+- Static HTML/CSS/Canvas 2D/JavaScript; **zero production dependencies or remote assets**.
 
-**Correctness outranks speed. Gameplay outranks the joke. Comedy never overrides fair combat.**
+No audio, touch controls, gamepads, network multiplayer or tournament-grade balancing yet. The CPU is a deterministic practice opponent, not an adaptive AI service. See the [tested evidence and limitations](docs/LBL-001-EVIDENCE.md).
 
-Read [AGENTS.md](AGENTS.md) first. The detailed, numbered non-negotiable contract is [docs/INVARIANTS.md](docs/INVARIANTS.md); these govern every Work/agent PR.
-
-## What exists today
-
-- A static HTML/CSS/JS pre-production landing page with an interactive **dialogue teaser**. It is not a gameplay demo.
-- A dependency-free, pure JavaScript **reference** match reducer with a fixed logical tick, bounded attacks and deterministic replay fingerprinting.
-- Node built-in tests and GitHub Actions checks, plus a guarded Pages workflow.
-- Game vision, rights policy, architecture decisions, roadmap and explicit autonomous-work handoff.
-
-## Start here
-
-- [Project concept and mechanics](docs/GAME_DESIGN.md)
-- [Core invariants and acceptance gates](docs/INVARIANTS.md)
-- [Technical architecture](docs/ARCHITECTURE.md)
-- [Originality and asset rights](docs/ASSETS_AND_RIGHTS.md)
-- [ChatGPT Work handoff](docs/WORK_HANDOFF.md)
-- [Roadmap](docs/ROADMAP.md)
-- [Getting started](GETTING_STARTED.md)
-- [Player instructions: planned controls](INSTRUCTIONS.md)
-
-## Development
-
-Node.js 22+ is used **only for checks**, not the deployed website. No npm dependencies are required.
+## Play and develop
 
 ```sh
-npm test
-npm run check
 python3 -m http.server 8000
 ```
 
-Then visit `http://localhost:8000/`. Run through a local server for development; the project site is entirely static.
+Open `http://localhost:8000/`. Select both fighters and the opponent mode, then **Enter the pit**. The field manual inside the game lists and remaps every key. No build or package installation is needed to play.
 
-**Maintainer control:** Agents work in branches and pull requests. No direct main writes, self-merges, releases or immutable tags without the human maintainer's approval. Every PR earns its own review, including a new review if the final commit changes.
+```sh
+npm run verify                  # dependency-free checks, tests and staging
+npm ci --ignore-scripts         # only for browser testing
+npx playwright install --with-deps chromium firefox webkit
+npm run browser
+```
 
-## Licence
+Node.js 22+ is test/build tooling only. Browser checks serve the actual staged build under `/LOWBLOWLEGENDS/`.
 
-Project code and documentation: [Apache License 2.0](LICENSE), subject to any future clearly identified third-party files and their individual licences. No third-party franchise characters, graphics, voice recordings or sounds have been imported. See [docs/ASSETS_AND_RIGHTS.md](docs/ASSETS_AND_RIGHTS.md).
+## Project contract
 
-QSOL-IMC original satire; not affiliated with or endorsed by any fighting-game franchise or public figure.
+**Correctness outranks speed. Gameplay outranks the joke. Comedy never overrides fair combat.**
 
+Read [AGENTS.md](AGENTS.md), [invariants](docs/INVARIANTS.md), [architecture](docs/ARCHITECTURE.md), [move data](docs/MOVE_DATA.md), [rights review](docs/ASSETS_AND_RIGHTS.md), and [roadmap](docs/ROADMAP.md). Quick links: [getting started](GETTING_STARTED.md) · [player instructions](INSTRUCTIONS.md) · [game vision](docs/GAME_DESIGN.md).
+
+The original reference kernel and tests remain preserved, separate from the playable simulation. Every PR needs review of its exact final commit and human approval. Agents do not merge, push main, tag or release.
+
+Code, original programmatic art and documentation use [Apache-2.0](LICENSE). No franchise assets, recognizable public figures, copied film dialogue or celebrity voices are included. Originality review is documented, not a guarantee of legal clearance.

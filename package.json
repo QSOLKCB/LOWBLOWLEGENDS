@@ -2,13 +2,18 @@
   "name": "lowblowlegends",
   "private": true,
   "type": "module",
-  "description": "Original browser fighter: pre-production design and deterministic combat reference",
+  "description": "Original lightweight browser arcade fighter with deterministic 60 Hz combat",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "check": "node tools/check-baseline.mjs",
+    "check": "node tools/check-baseline.mjs && node tools/check-assets.mjs",
     "build": "node tools/stage-pages.mjs",
-    "verify": "npm run check && npm test && npm run build"
+    "verify": "npm run check && npm test && npm run build",
+    "browser": "node tools/browser-check.cjs"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "1.51.1"
+  }
 }
-

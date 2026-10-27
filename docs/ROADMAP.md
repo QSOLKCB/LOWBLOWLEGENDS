@@ -1,42 +1,43 @@
-# Roadmap — proposals, not promises
+# Roadmap — evidence before completion claims
 
-## Foundation (this PR)
+## Foundation
 
-- [x] Design vision and binding non-negotiable invariants
-- [x] Agent handoff and rights policy
-- [x] Minimal deterministic headless combat **reference**
-- [x] Pre-production static GitHub Pages landing page
-- [x] No-dependency Node tests and CI workflow
-- [ ] Maintainer review and merge
-- [ ] Main-branch Pages deployment verified
+- [x] Binding invariant, rights, design, architecture and agent contracts
+- [x] Preserved deterministic reference reducer and tests
+- [x] Foundation PR #1 merged by maintainer
 
-## v0.1.0 — first playable fighter (next Work mission)
+## LBL-001 — implemented in this topic branch, pending review/integration
 
-- [ ] Two original combatants (independent designs and asset rights)
-- [ ] One original stage, camera, animation and readable hit/hurt boxes
-- [ ] Local input for two players, pause/restart and remapping
-- [ ] Fixed-tick movement, attacks, blocks, throws or equivalent counterplay
-- [ ] Hitstop/hitstun/recovery and fair simultaneous resolution
-- [ ] Meter-based punishable psyche-out move for each fighter
-- [ ] Rounds, KO/draw, timer, win screen and match restart
-- [ ] Subtitles and flash/shake controls
-- [ ] Replay regression and browser smoke tests
-- [ ] Screenshots/video evidence; genuinely playable Pages build after maintainer merge
+- [x] Ledger and Clinker: independent identities, geometric animation and original dialogue
+- [x] Arbitration Pit stage, readable HUD, separate subtitles and collision overlay
+- [x] Local two-player keyboard controls, remapping, focus pause and rematch
+- [x] Movement, jump/crouch, normal/low/air attacks, guard, throws and distinct specials
+- [x] Light-to-heavy confirm combo, hitstop, bounded recovery and simultaneous exchanges
+- [x] Meter-based, punishable psyche-out per fighter with real state effects
+- [x] Round timer, KO/timeout/draw, bounded match flow and result screen
+- [x] Flash/shake controls, reduced motion, scalable UI and text alternatives for menus/results
+- [x] Replay verification, fixed-schedule and mirror regressions; actual Chromium match/input/offline checks
+- [x] Simple deterministic CPU sparring partner
+- [x] Asset manifest, source hashes, originality review and local screenshots
+- [ ] Exact-final-head CI and Codex acceptance (see PR)
+- [ ] Maintainer's two-human keyboard/ghosting and gameplay balance playtest
+- [ ] Maintainer approval and merge
+- [ ] Main-branch Pages deployed SHA and live playthrough independently verified
+- [ ] Release/tag explicitly authorised by maintainer
 
-## v0.2.x — depth and accessibility
+## v0.2.x — proposed depth and accessibility
 
-- [ ] Practice mode and bounded CPU opponent
-- [ ] Expanded command inputs, combo training and frame-data overlay
-- [ ] Gamepad support, expanded remapping, comfort modes
-- [ ] Original soundtrack, effects and stronger stage presentation
-- [ ] Expanded roster only after combat balance evidence
+- [ ] Gamepad and touch input; expanded nonvisual combat cues
+- [ ] Sound effects/music with new rights entries and independent volume/mute controls
+- [ ] More varied CPU training scenarios and combo/frame-data trainer
+- [ ] Longer human balance sessions, combo scaling and throw-tech experiments
+- [ ] Distinct locomotion/knockdown animation polish and more readable small-screen combat
+- [ ] Save/import control profiles and localisation
 
-## Later (requires new decision)
+## Later — requires a new decision
 
-- [ ] Additional stages and tournament progression
-- [ ] Larger cast with distinct psychological weaknesses
-- [ ] Optional rollback networking only after deterministic replays and netcode threat model
-- [ ] Localisation and player-created content with rights controls
+- [ ] Additional original characters/stages after balance evidence
+- [ ] Tournament progression and user-created content rights controls
+- [ ] Rollback networking only after replay compatibility and threat-model work
 
-A PR must never convert a checklist item to complete merely because scaffolding exists. **No release or immutable tag until the human maintainer explicitly approves it.**
-
+Implemented does not mean released, legally certified, universally accessible or competitively balanced. See [LBL-001 evidence](LBL-001-EVIDENCE.md) for tested scope and limitations.

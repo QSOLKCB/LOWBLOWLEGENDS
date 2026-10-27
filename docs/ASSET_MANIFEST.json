@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "reviewDate": "2026-10-27",
+  "assets": [
+    {
+      "path": "src/game/render.mjs",
+      "author": "QSOL-IMC project (AI-assisted original authorship)",
+      "origin": "Original repository source; no imported reference media",
+      "license": "Apache-2.0",
+      "reviewDate": "2026-10-27",
+      "sha256": "ba405834db085500e922ed57c74a1c4a7a4b2e7532795a23b16de377da6d89d1"
+    },
+    {
+      "path": "src/game/content.mjs",
+      "author": "QSOL-IMC project (AI-assisted original authorship)",
+      "origin": "Original repository source; no imported reference media",
+      "license": "Apache-2.0",
+      "reviewDate": "2026-10-27",
+      "sha256": "8c0d001e514cbfb64ab177cab3cfafe46a7a152d4ca9531a24d105ed423f99f9"
+    },
+    {
+      "path": "index.html",
+      "author": "QSOL-IMC project (AI-assisted original authorship)",
+      "origin": "Original repository source; no imported reference media",
+      "license": "Apache-2.0",
+      "reviewDate": "2026-10-27",
+      "sha256": "d0e15d738b956b94e25f355d2d11d778a9186099171f0b50d5a0e69511dacc92"
+    },
+    {
+      "path": "style.css",
+      "author": "QSOL-IMC project (AI-assisted original authorship)",
+      "origin": "Original repository source; no imported reference media",
+      "license": "Apache-2.0",
+      "reviewDate": "2026-10-27",
+      "sha256": "c85b6bb19818c362ed491119bb8031a730da35cc1558e88fe4cedde7be448925"
+    }
+  ],
+  "replay": {
+    "path": "tests/fixtures/arcade-v1.json",
+    "ruleset": "lbl-arcade-1",
+    "ticks": 1488,
+    "digest": "44cbc785",
+    "sha256": "1e7b549768b406758928e0998add369c3e8d6f209db6089e3f2a2cbb6f693840"
+  }
+}
